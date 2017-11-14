@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,8 +18,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
-
-import javax.management.RuntimeErrorException;
 
 import com.google.common.net.InternetDomainName;
 
@@ -33,7 +33,7 @@ import com.google.common.net.InternetDomainName;
  */
 
 public class TrackURL {
-
+	
 	public String getURLCount(String urlString) throws IOException, URISyntaxException, ClassNotFoundException {
 
 		String urlStringNew;
@@ -41,14 +41,14 @@ public class TrackURL {
 		StringBuilder sb = null;
 		Map<String, Integer> urlMap = new HashMap<String, Integer>();
 
-		if (!urlString.isEmpty()) {
+		if (urlString!=null) {
 			if (!urlString.startsWith("http://")) {
 				urlStringNew = "http://" + urlString;
 			} else {
 				urlStringNew = urlString;
 			}
 		} else {
-			throw new RuntimeErrorException(null, "Please enter a valid URL");
+			return "URL cannot be empty";
 		}
 
 		URI uri = new URI(urlStringNew);

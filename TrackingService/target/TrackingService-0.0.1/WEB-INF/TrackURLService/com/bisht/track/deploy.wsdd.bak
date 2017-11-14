@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TrackURLService WSDL service -->
+
+  <service name="TrackURL" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://track.bisht.com"/>
+      <parameter name="wsdlServiceElement" value="TrackURLService"/>
+      <parameter name="schemaQualified" value="http://track.bisht.com"/>
+      <parameter name="wsdlServicePort" value="TrackURL"/>
+      <parameter name="className" value="com.bisht.track.TrackURLSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="TrackURL"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getURLCount" qname="operNS:getURLCount" xmlns:operNS="http://track.bisht.com" returnQName="retNS:getURLCountReturn" xmlns:retNS="http://track.bisht.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:urlString" xmlns:pns="http://track.bisht.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getURLCount"/>
+
+  </service>
+</deployment>
