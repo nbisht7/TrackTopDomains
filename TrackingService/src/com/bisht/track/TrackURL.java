@@ -93,7 +93,7 @@ public class TrackURL {
 			br.close();
 			fr.close();
 
-			// Making a set which has unique enteries of the domains
+			// Making a set which has unique entries of the domains
 			Set<Entry<String, Integer>> urlSet = urlMap.entrySet();
 
 			// Implementing own sorting logic
