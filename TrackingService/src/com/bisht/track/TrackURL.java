@@ -20,18 +20,16 @@ import java.util.StringTokenizer;
 import com.google.common.net.InternetDomainName;
 
 /**
- * @author nbisht7. 
- *         Purpose - Implement a service that exposes a method that takes a URL as a 
- *                   parameter. The service then keeps a leaderboard count by domain 
- *                   for all the URLs that are passed to this method. The UI should 
- *                   show the 3 highest entries in the leaderboard at that given time. 
- *         Input   - URL. 
- *         Output  - A service which provides endpoint to accept the input URL and return 
- *                   the three highest referring domains.
+ * @author nbisht7. Purpose - Implement a service that exposes a method that
+ *         takes a URL as a parameter. The service then keeps a leaderboard
+ *         count by domain for all the URLs that are passed to this method. The
+ *         UI should show the 3 highest entries in the leaderboard at that given
+ *         time. Input - URL. Output - A service which provides endpoint to
+ *         accept the input URL and return the three highest referring domains.
  */
 
 public class TrackURL {
-	
+
 	public String getURLCount(String urlString) throws IOException, URISyntaxException, ClassNotFoundException {
 
 		String urlStringNew;
@@ -39,7 +37,7 @@ public class TrackURL {
 		StringBuilder sb = null;
 		Map<String, Integer> urlMap = new HashMap<String, Integer>();
 
-		if (urlString!=null) {
+		if (urlString != null) {
 			if (!urlString.startsWith("http://")) {
 				urlStringNew = "http://" + urlString;
 			} else {
@@ -55,13 +53,9 @@ public class TrackURL {
 		String hostname = uri.getHost();
 		InternetDomainName name = InternetDomainName.from(hostname).topPrivateDomain();
 
-		String domain = name.toString();
+		String domainname = name.toString();
 
-		if (domain != null) {
-
-			// Fetching only the domains from the URLs
-			// That is given : www.xyz.com, get only : xyz.com
-			String domainname = domain.startsWith("www.") ? domain.substring(4) : domain;
+		if (domainname != null) {
 
 			// Storing the URLs entered by the user in a text file
 			try (FileWriter fw = new FileWriter(
